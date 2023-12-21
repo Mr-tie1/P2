@@ -1,0 +1,51 @@
+def add_equation(equations):
+    a = float(input("ضریب a را وارد کنید: "))
+    b = float(input("ضریب b را وارد کنید: "))
+    c = float(input("ضریب c را وارد کنید: "))
+    equations.append((a, b, c))
+    return equations
+
+def delete_equation(equations, index):
+    if 0 <= index < len(equations):
+        del equations[index]
+    else:
+        print("شاخص معادله ناصحیح است.")
+    return equations
+
+def sum_equations(eq1, eq2):
+    return (eq1[0] + eq2[0], eq1[1] + eq2[1], eq1[2] + eq2[2])
+
+def multiply_equations(eq1, eq2):
+    # ضرب دو معادله درجه دو زمانی که به صورت (a, b, c) داده شده‌اند،
+    # نتیجه‌ای با درجه چهارم‌ خواهد داشت که ما آن را به صورت فرضی بازنویسی نمی‌کنیم.
+    # برای ضرب، نیاز به قوانین کامل معادله درجه چهارم خواهیم داشت که اینجا ارائه نشده‌اند.
+    print("این عملیات هنوز پیاده‌سازی نشده است.")
+
+# اصلی
+equations_list = []
+
+while True:
+    command = input("اضافه کردن، حذف، جمع، ضرب، نمایش، خروج: ").lower()
+    if command == "اضافه کردن":
+        equations_list = add_equation(equations_list)
+    elif command == "حذف":
+        index = int(input("شماره معادله‌ای که می‌خواهید حذف کنید را وارد کنید: "))
+        equations_list = delete_equation(equations_list, index)
+    elif command == "جمع":
+        print("شماره دو معادله‌ای که می‌خواهید جمع کنید را وارد کنید.")
+        index1 = int(input("شماره اول: "))
+        index2 = int(input("شماره دوم: "))
+        if 0 <= index1 < len(equations_list) and 0 <= index2 < len(equations_list):
+            result = sum_equations(equations_list[index1], equations_list[index2])
+            print(f"نتیجه جمع معادلات: {result}")
+        else:
+            print("شاخص‌های نامعتبر.")
+    elif command == "ضرب":
+        print("این عملیات هنوز پیاده‌سازی نشده است.")
+    elif command == "نمایش":
+        for idx, eq in enumerate(equations_list):
+            print(f"{idx}: {eq}")
+    elif command == "خروج":
+        break
+    else:
+        print("دستور نامعتبر است.")
